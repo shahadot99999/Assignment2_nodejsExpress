@@ -9,6 +9,8 @@ app.use(express.json());
 app.use(express.text());
 app.use(express.urlencoded({extended : true}))
 
+
+//database neon connection
 const pool = new Pool({
   connectionString: config.connection_string,
 });
@@ -18,17 +20,15 @@ const pool = new Pool({
 const initDB = async()=>{
   try {
     await pool.query(`
-     CREATE TABLE IF NOT EXISTS users(
-     id SERIAL PRIMARY KEY,
-     name VARCHAR(20),
-     email VARCHAR(25) UNIQUE NOT NULL,
-     password VARCHAR(20) NOT NULL,
-     is_active BOOLEAN DEFAULT true,
-     age INT,
-
-     created_at TIMESTAMP DEFAULT NOW(),
-     updated_at TIMESTAMP DEFAULT NOW ()
-     ) 
+     CREATE TABLE IF NOT EXISTS users (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        email VARCHAR(255) UNIQUE NOT NULL,
+        password VARCHAR(255) NOT NULL,
+        role VARCHAR(50) DEFAULT 'contributor' CHECK (role IN ('contributor', 'maintainer')),
+        created_at TIMESTAMP DEFAULT NOW(),
+        updated_at TIMESTAMP DEFAULT NOW()
+      );
       `);
       console.log("Database connection successfully!");
   } catch (error) {
@@ -38,6 +38,7 @@ const initDB = async()=>{
 
 initDB();
 
+//browser loading
 app.get('/', (req : Request, res : Response) => {
   //res.send('Express Server');
   res.status(200).json({
@@ -52,15 +53,15 @@ app.get('/', (req : Request, res : Response) => {
 app.post("/api/users", async(req : Request, res: Response)=>{
     //console.log(req.body);
     // const body= req.body;
-    const {name, email, password, age}= req.body;
+    const {name, email, password, role}= req.body;
 
     try {
      const result = await pool.query(`
-     INSERT INTO users(name, email, password, age)
+     INSERT INTO users(name, email, password, role)
        VALUES($1, $2, $3, $4)
        RETURNING *
       `,
-    [name, email, password, age] ,
+    [name, email, password, role] ,
     );
       //console.log(result);
 
@@ -143,7 +144,8 @@ app.get('/api/users/:id', async(req : Request, res : Response)=>{
 //update users
 app.put("/api/users/:id", async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { name, password, age, is_active } = req.body;
+//  const { name, password, age, is_active } = req.body;
+const { name, password, role } = req.body;
 
   // console.log("Id: ", id);
   // console.log({name, password, age, is_active});
@@ -156,14 +158,15 @@ try {
   SET 
   name=COALESCE($1, name),
   password=COALESCE($2, password), 
-  age=COALESCE($3, age),
-  is_active=COALESCE($4, is_active)
+  role=COALESCE($3, role)
+ 
 
 
-  WHERE id=$5 RETURNING *
+  WHERE id=$4
+   RETURNING *
   
   `,
-    [name, password, age, is_active, id],
+    [name, password, role, id],
   );
   
   if(result.rows.length === 0){
@@ -226,6 +229,8 @@ app.delete("/api/users/:id", async(req : Request, res: Response)=>{
   }
 })
 
+
+//port
 app.listen(port, () => {
   console.log(`Assignment2 NodejsExpress app listening on port ${port}`)
 })
