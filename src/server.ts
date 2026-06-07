@@ -3,6 +3,7 @@ import  { Pool } from "pg";
 import config from "./config";
 import { initDB } from "./config/db";
 import { userRoute } from "./modules/auth/auth.route";
+import { authRoute } from "./modules/user/user.route";
 //import app from "./app";
 
 const app : Application = express()
@@ -14,6 +15,9 @@ app.use(express.text());
 app.use(express.urlencoded({extended : true}))
 
 app.use("/api/auth", userRoute);
+
+app.use("/api/auth", authRoute);
+
 
 //database neon connection
 const pool = new Pool({
