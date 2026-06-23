@@ -4,6 +4,8 @@ import config from "./config";
 import { initDB } from "./config/db";
 import { userRoute } from "./modules/auth/auth.route";
 import { authRoute } from "./modules/user/user.route";
+import fs from "fs"
+import logger from "./middleware/logger";
 //import app from "./app";
 
 const app : Application = express()
@@ -13,6 +15,8 @@ const app : Application = express()
 app.use(express.json());
 app.use(express.text());
 app.use(express.urlencoded({extended : true}))
+
+app.use(logger);
 
 app.use("/api/auth", userRoute);
 

@@ -4,6 +4,8 @@ import type { Application, Request, Response } from "express";
 import cors from "cors";
 import { userRoute } from "./modules/auth/auth.route";
 import { authRoute } from "./modules/user/user.route";
+import fs from "fs"
+import logger from "./middleware/logger";
 
 const app: Application = express();
 
@@ -12,12 +14,16 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use(logger);
+
 // Application Routes - THIS IS KEY
 app.use("/api/auth", userRoute);
 
 //app.use("/api/user", authRoute);
 
 app.use("/api/auth", authRoute);
+
+
 
 // Base route
 app.get("/", (req: Request, res: Response) => {

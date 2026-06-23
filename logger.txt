@@ -1,0 +1,54 @@
+Method -> GET Time -> 1780834858643 URL -> /Method -> GET Time -> 1780834952779 URL -> /Method -> GET Time -> 1780834963117 URL -> /api/usersMethod -> GET Time -> 1780834997437 URL -> /api/authMethod -> GET Time -> 1780835092209 URL -> /api/auth
+Method -> GET Time -> 1780835139711 URL -> /api/auth
+
+Method -> GET Time -> 1780835580275 URL -> /api/auth/15
+
+Method -> GET Time -> 1780835643931 URL -> /api/auth
+
+Method -> GET Time -> 1780836443872 URL -> /api/auth
+
+Method -> GET Time -> 1780836477129 URL -> /api/auth
+
+Method -> GET Time -> 1780836533290 URL -> /api/auth
+
+Method -> GET Time -> 1780836534879 URL -> /api/auth
+
+Method -> GET Time -> 1782214789339 URL -> /api/auth
+
+Method -> GET Time -> 1782214792086 URL -> /favicon.ico
+
+Method -> GET Time -> 1782215377567 URL -> /api/auth
+
+Method -> GET Time -> 1782215389554 URL -> /api/auth
+
+Method -> GET Time -> 1782215631275 URL -> /api/auth
+
+Method -> GET Time -> 1782215684555 URL -> /api/auth
+
+Method -> POST Time -> 1782215799227 URL -> /api/auth/login
+
+Method -> GET Time -> 1782215959402 URL -> /api/users
+
+Method -> GET Time -> 1782216017686 URL -> /api/users
+
+Method -> GET Time -> 1782216025156 URL -> /api/auth
+
+Method -> GET Time -> 1782216555331 URL -> /api/auth
+
+Method -> GET Time -> 1782216657052 URL -> /api/auth
+
+Method -> GET Time -> 1782217005651 URL -> /api/auth
+
+Method -> GET Time -> 1782217368802 URL -> /api/auth
+
+Method -> GET Time -> 1782217414099 URL -> /api/auth
+
+Method -> GET Time -> 1782217434687 URL -> /api/auth
+
+Method -> GET Time -> 1782217774874 URL -> /api/auth
+
+Method -> GET Time -> 1782218092175 URL -> /api/auth
+
+Method -> GET Time -> 1782218445310 URL -> /api/auth
+
+Method -> GET Time -> 1782218546427 URL -> /api/auth
